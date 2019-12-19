@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Code Quiz</title>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
+        integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+    <script src='https://code.jquery.com/jquery-3.4.1.slim.min.js'
+        integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n'
+        crossorigin='anonymous'></script>
+    <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'
+        integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo'
+        crossorigin='anonymous'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'
+        integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6'
+        crossorigin='anonymous'></script>
+
+    <style>
+        .option {
+
+            background: yellowgreen;
+        }
+
+        .timer {
+            text-align: center;
+            font-size: medium;
+        }
+    </style>
+</head>
+
+<body style="background: rgb(238, 237, 237)">
+    <div class="container-fluid allstuff score-last">
+        <div class="row">
+            <p class="col-12 col-sm-12 col-md-12 col-lg-12" style="height: 40px"></p>
+        </div>
+        <div class="row wrapper">
+            <div class="col-4 col-sm-4 col-md-4 col-lg-5"></div>
+            <header class="head col-4 col-sm-4 col-md-4 col-lg-2">
+                <h4 style="text-align: center;">Quiz</h4>
+            </header>
+            <div class="timer col-4 col-sm-4 col-md-4 col-lg-5"></div>
+        </div>
+        <div class="row">
+            <div class="col-1 col-sm-1 col-md-2 col-lg-3"></div>
+            <div class="card col-10 col-sm-10 col-md-8 col-lg-6" style="border: 2px inset #777777">
+
+                <div class="row">
+                    <div class="main-box" style="text-align: center;">
+                        <p id="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic sapiente
+                            nostrum nulla
+                            ad molestias voluptas mollitia cumque consequatur esse dicta? Eveniet possimus blanditiis
+                            tempora ipsa dolor, quas veniam sint magni.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-1 col-sm-1 col-md-2 col-lg-3"></div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4"></div>
+            <button id="start-btn" class="btn col-4 col-sm-4 col-md-4 col-lg-4"
+                style="background:blueviolet; border: 2px inset #dddddd; color: seashell;">START</button>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4"></div>
+        </div>
+
+    </div>
+
+    <script src="./script.js"></script>
+    <script src="./questions.js"></script>
+</body>
+
+</html>
