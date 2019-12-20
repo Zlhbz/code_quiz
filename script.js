@@ -1,12 +1,20 @@
-
 var startBtn = document.getElementById("start-btn");
 var mainBox = document.querySelector(".main-box");
 var timerBox = document.querySelector(".timer");
 var scoreLast = document.querySelector(".score-last")
+var wrapper1 = document.querySelector(".wrapper")
+var scorers = document.createElement("button");
 
 var scoreDiv = document.createElement("div");
 var questionBox = document.createElement("div");
 var timeDiv = document.createElement("div");
+
+
+scorers.textContent = "Get Scores";
+scorers.setAttribute("style", "background: rgb(14, 162, 207); color:white; margin:10px")
+wrapper1.appendChild(scorers);
+
+
 
 
 
@@ -42,6 +50,13 @@ var questions = [
 var score = 0;
 var secondsLeft = 15 * questions.length;
 var index = 0;
+console.log(window);
+
+scorers.addEventListener("click", function () {
+
+    alert(JSON.stringify(GetScores()));
+
+})
 
 
 startBtn.addEventListener("click", function () {
@@ -118,7 +133,54 @@ function sendMessage() {
     if (seconds_left_value < 0) {
         seconds_left_value = 0
     }
-    scoreDiv.textContent = "Your score is " + (score + seconds_left_value);
+    scoreDiv.textContent = "Your score is " + (score + seconds_left_value) + " Submit your score with initials!";
     scoreLast.appendChild(scoreDiv);
 
+
+
+    var input_user = document.createElement("input");
+    input_user.setAttribute("id", "user_name")
+    input_user.setAttribute("type", "text");
+
+    scoreLast.appendChild(input_user);
+
+    var submitBtn = document.createElement("button");
+    submitBtn.textContent = "SUBMIT";
+    scoreLast.appendChild(submitBtn);
+
+
+    submitBtn.addEventListener("click", function () {
+        console.log("Input_user.value=" + input_user.value)
+        AddNewHighScore(input_user.value, seconds_left_value + score);
+    })
+
 }
+
+function AddNewHighScore(user, score) {
+    var scores = window.localStorage.getItem("high_scores");
+    if (scores == null) {
+        scores = { user: score }
+    }
+    else {
+        scores = JSON.parse(scores);
+        if (user in scores) {
+            scores[user] = Math.max(scores[user], score);
+        }
+        else {
+            scores[user] = score;
+        }
+    }
+    window.localStorage.setItem("high_scores", JSON.stringify(scores));
+}
+
+function GetScores() {
+    var scores = window.localStorage.getItem("high_scores");
+    if (scores == null) {
+        return {}
+    }
+    else {
+        return JSON.parse(scores);
+    }
+}
+
+
