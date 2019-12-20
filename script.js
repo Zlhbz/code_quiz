@@ -1,6 +1,3 @@
-var score = 0;
-var secondsLeft = 5; //parseInt(questions.length)
-var index = 0;
 
 var startBtn = document.getElementById("start-btn");
 var mainBox = document.querySelector(".main-box");
@@ -10,16 +7,7 @@ var scoreLast = document.querySelector(".score-last")
 var scoreDiv = document.createElement("div");
 var questionBox = document.createElement("div");
 var timeDiv = document.createElement("div");
-var answerBox1 = document.createElement("button");
-var answerBox2 = document.createElement("button");
-var answerBox3 = document.createElement("button");
-var answerBox4 = document.createElement("button");
 
-
-answerBox1.setAttribute("class", "option");
-answerBox2.setAttribute("class", "option");
-answerBox3.setAttribute("class", "option");
-answerBox4.setAttribute("class", "option");
 
 
 var questions = [
@@ -33,81 +21,104 @@ var questions = [
         choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
         answer: "parentheses"
     },
-    ///etc.
+    {
+        title: "Which one is for nextline?",
+        choices: ["<p>", "<br>", "<h1>", "<section>"],
+        answer: "<br>"
+    },
+    {
+        title: "Which function do create random number between 0-1?",
+        choices: ["Math.ceiling", "Math.random", "setAtribute", "Math.floor"],
+        answer: "Math.random"
+    },
+    {
+        title: "How to write an IF statement in JavaScript?",
+        choices: ["if i = 0", "if i == 0 then", "if (i == 0)", "if i =0 then"],
+        answer: "if (i == 0)"
+    }
+
 ];
 
+var score = 0;
+var secondsLeft = 15 * questions.length;
+var index = 0;
 
 
-quizAll();
-
-
-function quizAll() {
-    toStart();
+startBtn.addEventListener("click", function () {
+    setTime();
     displayAll();
-}
+})
 
-
-function toStart() {
-    startBtn.addEventListener("click", function () {
-        setTime();
-    })
-}
 
 
 function displayAll() {
-    this.addEventListener("click", function () {
-
-        if (index < questions.length) {
-            displayAn(index);
-        }
-    })
-}
-
-function displayAn(e) {
-    function test() {
-        alert("options");
-        console.log(this.getAttribute("data-ch1"))
-        // if(this.getAttribute("data-ch1") === ){
-        // score++;
-        // }
-
+    if (index < questions.length) {
+        displayNextQuestion();
     }
-    startBtn.style.visibility = "hidden";
-    document.getElementById("description").textContent = " ";
-    questionBox.textContent = questions[e].title;
-    mainBox.appendChild(questionBox);
-    answerBox1.textContent = questions[e].choices[0];
-    answerBox1.setAttribute("data-ch1", questions[e].choices[0]);
-    // answerBox1.setAttribute("onclick", test());
-    answerBox1.onclick = test;
-    mainBox.appendChild(answerBox1);
-    answerBox2.textContent = questions[e].choices[1];
-    mainBox.appendChild(answerBox2);
-    answerBox3.textContent = questions[e].choices[2];
-    mainBox.appendChild(answerBox3);
-    answerBox4.textContent = questions[e].choices[3];
-    mainBox.appendChild(answerBox4);
-    index++;
+
 }
 
+function displayNextQuestion() {
 
+    startBtn.style.visibility = "hidden";
+    mainBox.innerHTML = "";
+    if (index >= questions.length) {
+        return;
+    }
+    questionBox.textContent = questions[index].title;
+    mainBox.appendChild(questionBox);
+
+    for (var j = 0; j < 4; j++) {
+        var answerBox = document.createElement("button");
+        answerBox.setAttribute("class", "answerOption");
+        answerBox.textContent = questions[index].choices[j];
+        answerBox.setAttribute("data-ch1", questions[index].choices[j]);
+        answerBox.addEventListener("click", function () {
+            var my_index_val = index - 1;
+            console.log("This is :", this.innerText)
+
+            if (this.innerText === questions[my_index_val].answer) {
+                score = score + 100
+            }
+            else {
+                secondsLeft = secondsLeft - 15
+            }
+            if (index < questions.length) {
+                displayNextQuestion();
+            }
+            else {
+                sendMessage();
+            }
+        })
+        mainBox.appendChild(answerBox);
+    }
+    index++;
+
+}
+
+var timerInterval = null;
 
 function setTime() {
-    var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         secondsLeft--;
         timeDiv.textContent = secondsLeft;
         timerBox.appendChild(timeDiv);
-        if (secondsLeft === 0) {
-            clearInterval(timerInterval);
+        if (secondsLeft <= 0) {
             sendMessage();
         }
     }, 1000);
 }
 
 function sendMessage() {
+    clearInterval(timerInterval);
+
     timeDiv.textContent = " ";
 
-    scoreDiv.textContent = "Your score is " + (parseInt(score) + parseInt(secondsLeft));
+    var seconds_left_value = secondsLeft;
+    if (seconds_left_value < 0) {
+        seconds_left_value = 0
+    }
+    scoreDiv.textContent = "Your score is " + (score + seconds_left_value);
     scoreLast.appendChild(scoreDiv);
 
 }

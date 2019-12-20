@@ -19,9 +19,14 @@
         crossorigin='anonymous'></script>
 
     <style>
-        .option {
+        .allstuff {
+            font-family: 'Times New Roman', Times, serif;
+        }
 
-            background: yellowgreen;
+        .answerOption {
+            background: rgb(14, 162, 207);
+            color: black;
+            margin: 10px;
         }
 
         .timer {
@@ -49,10 +54,13 @@
 
                 <div class="row">
                     <div class="main-box" style="text-align: center;">
-                        <p id="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic sapiente
-                            nostrum nulla
-                            ad molestias voluptas mollitia cumque consequatur esse dicta? Eveniet possimus blanditiis
-                            tempora ipsa dolor, quas veniam sint magni.</p>
+                        <p id="description">You will answer 5 questions in this quiz! Each correct answer adds 100
+                            points to your final score and each wrong answer subtracts 15 seconds from time remaining.
+                            Final
+                            score will be calculated by summing of your scores by correct answers and remaining seconds.
+                            Answering quickly and correctly results in a higher score. You have 75 seconds! Start with
+                            start button!
+                            Good luck! </p>
                     </div>
                 </div>
 
@@ -64,7 +72,7 @@
 
             <div class="col-4 col-sm-4 col-md-4 col-lg-4"></div>
             <button id="start-btn" class="btn col-4 col-sm-4 col-md-4 col-lg-4"
-                style="background:blueviolet; border: 2px inset #dddddd; color: seashell;">START</button>
+                style="background:rgb(14, 162, 207); border: 2px inset #dddddd; color: seashell;">START</button>
             <div class="col-4 col-sm-4 col-md-4 col-lg-4"></div>
         </div>
 
